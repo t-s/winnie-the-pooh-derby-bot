@@ -51,7 +51,7 @@ public class Bot {
 	    						Thread[] threadArray = threadSet.toArray(new Thread[threadSet.size()]);
 	    						for (Thread th : threadArray)
 	    						{
-	    							System.out.println("Sleeping.");
+	    							System.out.println("Thread " + th.getId() + " sleeping.");
 	    							th.sleep(500);
 	    						}
 	    						once = true;
