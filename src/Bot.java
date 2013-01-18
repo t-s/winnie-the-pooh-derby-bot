@@ -41,7 +41,7 @@ public class Bot {
 	    			{
 	    				robot.mouseMove(x+874, 550+150);
 	    				i++;
-	    				if(y > 85)
+	    				if(y > 105)
 	    				{
 	    					robot.mousePress(InputEvent.BUTTON1_MASK);
 	    					
