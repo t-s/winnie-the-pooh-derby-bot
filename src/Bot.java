@@ -17,10 +17,10 @@ public class Bot {
 		int color = 0;
 		int WHITE = 240;
 		
-		int HEIGHT_OF_AREA = 250;
-		int WIDTH_OF_AREA = 160;
 		int TOP_LEFT_X = 874;
 		int TOP_LEFT_Y = 550;
+		int HEIGHT_OF_AREA = 250;
+		int WIDTH_OF_AREA = 160;
 		
 		int HR_ZONE = 105;
 		int SAFE_ZONE = 50;
@@ -54,6 +54,9 @@ public class Bot {
 	    					
 	    					if(!once)
 	    					{
+	    						//it turns out robot.delay can be used instead of sleeping all threads.
+	    						//also, look into autodelay, which is a component of robot instances
+	    						//robot.delay(500);
 	    						Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
 	    						Thread[] threadArray = threadSet.toArray(new Thread[threadSet.size()]);
 	    						for (Thread th : threadArray)
