@@ -21,7 +21,12 @@ public class Bot {
 		int HEIGHT_OF_AREA = 250;
 		int WIDTH_OF_AREA = 160;
 
-		int HR_ZONE = 105;
+		//decrease HR_ZONE for faster pitches
+		//increase it for slower pitches
+		//100 is best for first pitcher, eeyore
+		//90 for dumbo
+		//80 works well for piglet
+		int HR_ZONE = 100;
 		int SAFE_ZONE = 50;
 
 		int BASELINE_Y = 150;
@@ -44,7 +49,7 @@ public class Bot {
 		while (hits < PITCHES) {
 			
 			BufferedImage screen = robot.createScreenCapture(screenRect);
-			outerloop:
+			outsideloop:
 			for (x = 0; x < screenRect.width; x++) {
 				for (y = 0; y < screenRect.height; y++) {
 					
@@ -53,8 +58,8 @@ public class Bot {
 					//red component is shifted 16 bits
 					//green component is shifted 8 bits
 					//blue component is simply and'ed
-					if ((color & 0xFF) > WHITE && (color >> 8 & 0xFF) > WHITE
-							&& (color >> 16 & 0xFF) > WHITE) 
+					if (((color & 0xFF) > WHITE) && ((color >> 8 & 0xFF) > WHITE)
+							&& ((color >> 16 & 0xFF) > WHITE)) 
 					{
 						
 						// keep Y centered so that Pooh only moves left to
@@ -92,29 +97,37 @@ public class Bot {
 					else if ((closeTo((color & 0xFF), 255)) && (closeTo((color >> 8 & 0xFF), 90))
 							&& (closeTo((color >> 16 & 0xFF), 25)))
 					{
+						robot.mouseRelease(InputEvent.BUTTON1_MASK);
 						System.out.println("Strike!");
-						robot.mouseMove(xhit/2 + TOP_LEFT_X, TOP_LEFT_Y + BASELINE_Y);
+						robot.mouseMove(WIDTH_OF_AREA/2 + TOP_LEFT_X, TOP_LEFT_Y + BASELINE_Y);
 						allThreadSleep();
 						hits++;
-						break outerloop;
+						break outsideloop;
 					}
 					else if ((closeTo((color & 0xFF), 83)) && (closeTo((color >> 8 & 0xFF), 130))
 							&& (closeTo((color >> 16 & 0xFF), 255)))
 					{
+						robot.mouseRelease(InputEvent.BUTTON1_MASK);
 						System.out.println("Home run!");
-						robot.mouseMove(xhit/2 + TOP_LEFT_X, TOP_LEFT_Y + BASELINE_Y);
+						robot.mouseMove(WIDTH_OF_AREA/2 + TOP_LEFT_X, TOP_LEFT_Y + BASELINE_Y);
 						allThreadSleep();
 						hits++;
-						break outerloop;
+						break outsideloop;
 					}
 					else if ((closeTo((color & 0xFF), 57)) && (closeTo((color >> 8 & 0xFF), 175))
 							&& (closeTo((color >> 16 & 0xFF), 255)))
 					{
+						robot.mouseRelease(InputEvent.BUTTON1_MASK);
 						System.out.println("Hit!");
-						robot.mouseMove(xhit/2 + TOP_LEFT_X, TOP_LEFT_Y + BASELINE_Y);
+						robot.mouseMove(WIDTH_OF_AREA/2 + TOP_LEFT_X, TOP_LEFT_Y + BASELINE_Y);
 						allThreadSleep();
 						hits++;
-						break outerloop;
+						break outsideloop;
+					}
+					else
+					{
+						if(once)
+							once = false;
 					}
 				}
 			}
@@ -146,4 +159,3 @@ public class Bot {
 				
 	}
 }
-
