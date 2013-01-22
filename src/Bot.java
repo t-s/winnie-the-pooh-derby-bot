@@ -18,7 +18,7 @@ public class Bot {
 		int WHITE = 240;
 		
 		int HEIGHT_OF_AREA = 250;
-		int WIDTH_OF_AREA = 250;
+		int WIDTH_OF_AREA = 160;
 		int TOP_LEFT_X = 874;
 		int TOP_LEFT_Y = 550;
 		
@@ -73,16 +73,16 @@ public class Bot {
 	    				
 	    				//Uncomment below for image generation of homerun zone - i.e. where bot tracks ball
 	    				
-	    				//if(i%100==0)
-	    				//{
-	    				//	File outputfile = new File("saved" + i/100 + ".png");
-	    				//	try {
-	    				//		ImageIO.write(img, "png", outputfile);
-	    				//	
-	    				//	} catch (IOException e) {
-	    				//		e.printStackTrace();
-	    				//	}
-	    				//}
+	    				if(i%100==0)
+	    				{
+	    					File outputfile = new File("saved" + i/100 + ".png");
+	    					try {
+	    						ImageIO.write(img, "png", outputfile);
+	    					
+	    					} catch (IOException e) {
+	    						e.printStackTrace();
+	    					}
+	    				}
 	    			}
 	    		}
 	    	}
