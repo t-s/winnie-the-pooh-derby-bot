@@ -27,16 +27,20 @@ public class Bot {
 		//110 for 2nd pitcher
 		//90 for 3rd pitcher
 		
-		int HR_ZONE = 110;
-		int SAFE_ZONE = 50;
+		//105 for 5th pitcher
+		
+		int HR_ZONE = 55;
+		int SAFE_ZONE = 20;
 
 		int BASELINE_Y = 200;
 		
 		// adjust this for each pitcher
-		int PITCHES = 15;
+		int PITCHES = 30;
 		int hits = 0;
+		boolean ballvisible = false;
 		
 		boolean once = false;
+		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice devices[] = ge.getScreenDevices();
 
@@ -65,20 +69,24 @@ public class Bot {
 						if(!once)
 						{
 							robot.mouseMove(x + TOP_LEFT_X, TOP_LEFT_Y + BASELINE_Y);
+							i++;
 
-							if (y > HR_ZONE) {
+							if (y >= HR_ZONE) {
 								if (!once) {					
 									once = true;
 								}
 								robot.mousePress(InputEvent.BUTTON1_MASK);
+								ballvisible = false;
 							}
 							
+							if(!ballvisible)
+								ballvisible = true;
 							
 						}
 						if(once)
 						{
 							if (y < SAFE_ZONE) {
-								robot.mouseRelease(InputEvent.BUTTON1_MASK);
+								//robot.mouseRelease(InputEvent.BUTTON1_MASK);
 								once = false;
 							}
 						}
@@ -86,16 +94,16 @@ public class Bot {
 						// Uncomment below for image generation of homerun zone
 						// - i.e. where bot tracks ball
 
-						//if (i % 1000 == 0) {
-						//	File outputfile = new File("saved" + i / 1000
-						//			+ ".png");
-						//	try {
-						//		ImageIO.write(screen, "png", outputfile);
+						if (i % 100 == 0) {
+							File outputfile = new File("saved" + i / 100
+									+ ".png");
+							try {
+								ImageIO.write(screen, "png", outputfile);
 
-						//	} catch (final IOException e) {
-						//		e.printStackTrace();
-						//	}
-						//}
+							} catch (final IOException e) {
+								e.printStackTrace();
+							}
+						}
 					}
 					else if ((closeTo((color & 0xFF), 255)) && (closeTo((color >> 8 & 0xFF), 90))
 							&& (closeTo((color >> 16 & 0xFF), 25)))
@@ -140,6 +148,11 @@ public class Bot {
 					{
 						if(once)
 							once = false;
+						if(ballvisible)
+						{
+							
+								
+						}
 					}
 				}
 			}
