@@ -20,8 +20,8 @@ public class Bot {
 		
 		Toolkit.getDefaultToolkit().addAWTEventListener(
 				new Listener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
-	    JFrame frame = new JFrame();
-	    frame.setVisible(true);
+		JFrame frame = new JFrame();
+        frame.setVisible(true);
 
 		int i = 0;
 		int x = 0;
